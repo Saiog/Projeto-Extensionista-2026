@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produtos | Mais Etiquetas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-dashboard-body">
+
+    <aside class="admin-sidebar">
+        <div class="sidebar-logo">
+            <img src="img/imagem1.jpg" alt="Mais Etiquetas">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="active"><i class="fas fa-box-open"></i> Cadastrar Produto</a>
+            <a href="index.html" class="logout"><i class="fas fa-sign-out-alt"></i> Sair do Painel</a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <header class="admin-header">
+            <h2>Novo Produto</h2>
+            <div class="admin-user">
+                <span>Administrador</span>
+                <i class="fas fa-user-circle fa-2x"></i>
+            </div>
+        </header>
+
+        <section class="admin-content reveal active">
+            <div class="card admin-form-card">
+                <form id="productRegistrationForm" class="product-form">
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="prodName">Nome do Produto</label>
+                            <input type="text" id="prodName" placeholder="Ex: Rótulo BOPP" required>
+                        </div>
+                        <div class="form-group half">
+                            <label for="prodCategory">Categoria</label>
+                            <select id="prodCategory" required>
+                                <option value="">Selecione...</option>
+                                <option value="frigorifico">Frigorífico</option>
+                                <option value="hortifruti">Hortifruti</option>
+                                <option value="ribbons">Ribbons</option>
+                                <option value="ecommerce">E-commerce</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodDescription">Descrição Detalhada</label>
+                        <textarea id="prodDescription" rows="3" placeholder="Descreva o material..." required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="prodStatus">Status</label>
+                            <select id="prodStatus">
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar Produto</button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

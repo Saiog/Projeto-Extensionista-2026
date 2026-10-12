@@ -88,4 +88,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1500);
         });
     }
-});
+    const productForm = document.getElementById('productRegistrationForm');
+
+if (productForm) {
+    productForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Impede o recarregamento padrão da página
+        
+        // Alteração visual do botão para indicar carregamento
+        const btnSubmit = productForm.querySelector('button[type="submit"]');
+        const originalText = btnSubmit.innerHTML;
+        btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A guardar...';
+        btnSubmit.disabled = true;
+
+        // Captura dos valores preenchidos no formulário
+        const produtoData = {
+            nome: document.getElementById('prodName').value,
+            categoria: document.getElementById('prodCategory').value,
+            descricao: document.getElementById('prodDescription').value,
+            status: document.getElementById('prodStatus').value
+        };
+
+        try {
+            // Chamada real para o microsserviço Python/FastAPI
+            const response = await fetch('http://127.0.0.1:8000/api/produtos', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify(produtoData)
+            });
+
+            if (response.ok) {
+                const resultado = await response.json();
+                alert(`Produto "${produtoData.nome}" registado com sucesso no SQLite! ID: ${resultado.id}`);
+                productForm.reset();
+            } else {
+                alert('Erro ao guardar o produto. Verifique os dados enviados.');
+            }
+        } catch (error) {
+            console.error("Erro ao ligar ao servidor Python:", error);
+            alert('Não foi possível conectar ao servidor. Certifique-se de que a API (Uvicorn) está a correr.');
+        } finally {
+            // Restaura o estado original do botão (com sucesso ou com erro)
+            btnSubmit.innerHTML = originalText;
+            btnSubmit.disabled = false;
+        }
+    })
+}
+        })
